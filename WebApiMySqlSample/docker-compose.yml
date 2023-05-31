@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  web:
+    build: TodoApi
+    ports:
+      - 5000:80
+    environment:
+      - ConnectionStrings:DefaultConnection=server=db;uid=root;pwd=example;database=TodoDatabase
+  db:
+    image: mysql:latest
+    volumes:
+      - ./setup/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: TodoDatabase
+      MYSQL_ROOT_PASSWORD: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
