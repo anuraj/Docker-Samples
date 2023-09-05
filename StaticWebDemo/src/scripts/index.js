@@ -1,0 +1,1 @@
+document.getElementById("apiendpoint").innerHTML = "API Endpoint: " + window.API_ENDPOINT;
